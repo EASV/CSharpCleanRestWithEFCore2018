@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CustomerApp.Core.Entity\CustomerApp.Core.Entity.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="ApplicationService\Dm,urki.cs" />
+    <Compile Remove="ApplicationService\Implementation\CustomerService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DomainService\" />
+    <Folder Include="ApplicationService\" />
+    <Folder Include="ApplicationService\Services\" />
+  </ItemGroup>
+</Project>
