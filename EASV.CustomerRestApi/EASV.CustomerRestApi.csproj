@@ -18,7 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CustomerApp.Core.Entity\CustomerApp.Core.Entity.csproj" />
     <ProjectReference Include="..\CustomerApp.Core\CustomerApp.Core.csproj" />
-    <ProjectReference Include="..\CustomerApp.Infrastructure.Static.Data\CustomerApp.Infrastructure.Static.Data.csproj" />
+    <ProjectReference Include="..\CustomerApp.Infrastructure.Data\CustomerApp.Infrastructure.Data.csproj" />
   </ItemGroup>
 
 </Project>

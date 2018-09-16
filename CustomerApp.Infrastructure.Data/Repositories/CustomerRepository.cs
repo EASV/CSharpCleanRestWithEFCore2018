@@ -16,7 +16,9 @@ namespace CustomerApp.Infrastructure.Data.Repositories
         
         public Customer Create(Customer customer)
         {
-            throw new System.NotImplementedException();
+           var cust = _ctx.Customers.Add(customer).Entity;
+            _ctx.SaveChanges();
+            return cust;
         }
 
         public Customer ReadyById(int id)
