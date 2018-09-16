@@ -34,7 +34,7 @@ namespace EASV.CustomerRestApi.Controllers
             return _customerService.FindCustomerByIdIncludeOrders(id);
         }
 
-        // POST api/customers -- CREATE
+        // POST api/customers -- CREATE JSON
         [HttpPost]
         public ActionResult<Customer> Post([FromBody] Customer customer)
         {

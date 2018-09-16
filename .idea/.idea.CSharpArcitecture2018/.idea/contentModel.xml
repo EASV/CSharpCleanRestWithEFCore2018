@@ -1,23 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
+    <e p="/32896f59" t="IncludeRecursive" />
     <e p="/app" t="IncludeRecursive" />
-    <e p="/b5218471" t="IncludeRecursive" />
     <e p="$PROJECT_DIR$" t="IncludeFlat">
-      <e p="ConsoleApp2017" t="IncludeRecursive">
-        <e p="bin" t="ExcludeRecursive" />
-        <e p="ConsoleApp2017.csproj" t="IncludeRecursive" />
-        <e p="IPrinter.cs" t="Include" />
-        <e p="obj" t="ExcludeRecursive">
-          <e p="Debug" t="Include">
-            <e p="netcoreapp2.1" t="Include">
-              <e p="ConsoleApp2017.AssemblyInfo.cs" t="Include" />
-            </e>
-          </e>
-        </e>
-        <e p="Printer.cs" t="Include" />
-        <e p="Program.cs" t="Include" />
-      </e>
       <e p="core" t="Include" />
       <e p="CSharpArcitecture2018.sln" t="IncludeFlat" />
       <e p="CustomerApp.Core" t="IncludeRecursive">
@@ -55,6 +41,17 @@
           </e>
         </e>
         <e p="Order.cs" t="Include" />
+      </e>
+      <e p="CustomerApp.Infrastructure.Data" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="CustomerApp.Infrastructure.Data.csproj" t="IncludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp2.1" t="Include">
+              <e p="CustomerApp.Infrastructure.Data.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
       </e>
       <e p="CustomerApp.Infrastructure.Static.Data" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
@@ -100,6 +97,6 @@
       <e p="UI" t="Include" />
     </e>
     <e p="$USER_HOME$/Library/Caches/Rider2018.2/extResources" t="IncludeRecursive" />
-    <e p="$USER_HOME$/Library/Caches/Rider2018.2/resharper-host/local/Transient/ReSharperHost/v182/SolutionCaches/_CSharpArcitecture2018.-1089863287.00" t="ExcludeRecursive" />
+    <e p="$USER_HOME$/Library/Caches/Rider2018.2/resharper-host/local/Transient/ReSharperHost/v182/SolutionCaches/_CSharpArcitecture2018.-1601991669.00" t="ExcludeRecursive" />
   </component>
 </project>
