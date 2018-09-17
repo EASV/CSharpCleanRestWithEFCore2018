@@ -46,6 +46,7 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="CustomerApp.Infrastructure.Data.csproj" t="IncludeRecursive" />
         <e p="CustomerAppContext.cs" t="Include" />
+        <e p="DBInitializer.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp2.1" t="Include">
@@ -82,6 +83,7 @@
           <e p="CustomersController.cs" t="Include" />
           <e p="OrdersController.cs" t="Include" />
         </e>
+        <e p="customerApp.db" t="Include" />
         <e p="EASV.CustomerRestApi.csproj" t="IncludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">

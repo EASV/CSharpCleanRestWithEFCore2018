@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CustomerApp.Core.DomainService;
 using CustomerApp.Core.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace CustomerApp.Infrastructure.Data.Repositories
 {
@@ -24,6 +25,13 @@ namespace CustomerApp.Infrastructure.Data.Repositories
         public Customer ReadyById(int id)
         {
             return _ctx.Customers
+                .FirstOrDefault(c => c.Id == id);
+        }
+        
+        public Customer ReadyByIdIncludeOrders(int id)
+        {
+            return _ctx.Customers
+                .Include(c => c.Orders)
                 .FirstOrDefault(c => c.Id == id);
         }
 

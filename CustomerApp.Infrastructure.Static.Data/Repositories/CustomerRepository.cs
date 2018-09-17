@@ -76,5 +76,9 @@ namespace CustomerApp.Infrastructure.Static.Data.Repositories
             return customerFound;
         }
 
+        public Customer ReadyByIdIncludeOrders(int id)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

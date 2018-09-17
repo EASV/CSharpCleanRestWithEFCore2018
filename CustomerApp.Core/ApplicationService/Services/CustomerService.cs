@@ -42,11 +42,19 @@ namespace CustomerApp.Core.ApplicationService.Services
 
         public Customer FindCustomerByIdIncludeOrders(int id)
         {
-            var customer = _customerRepo.ReadyById(id);
-            customer.Orders = _orderRepo.ReadAll()
-                .Where(order => order.Customer.Id == customer.Id)
-                .ToList();
+            var customer = _customerRepo.ReadyByIdIncludeOrders(id);
             return customer;
+            
+            /*    Read Cust By Id
+             *     SELECT "c"."Id", "c"."Address", "c"."FirstName", "c"."LastName"
+                  FROM "Customers" AS "c"
+                  WHERE "c"."Id" = @__id_0
+                  LIMIT 1
+             */
+            /*    Read Orders with Customer ID
+             *     SELECT "o"."Id", "o"."CustomerId", "o"."DeliveryDate", "o"."OrderDate"
+                    FROM "Orders" AS "o"
+             */
         }
 
         public List<Customer> GetAllCustomers()

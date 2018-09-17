@@ -17,5 +17,6 @@ namespace CustomerApp.Core.DomainService
         Customer Update(Customer customerUpdate);
         //Delete Data
         Customer Delete(int id);
+        Customer ReadyByIdIncludeOrders(int id);
     }
 }

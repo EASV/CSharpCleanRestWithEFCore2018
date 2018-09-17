@@ -27,9 +27,12 @@ namespace EASV.CustomerRestApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<CustomerAppContext>(
+            /*services.AddDbContext<CustomerAppContext>(
                 opt => opt.UseInMemoryDatabase("ThaDB")
-                );
+                );*/
+
+            services.AddDbContext<CustomerAppContext>(
+                opt => opt.UseSqlite("Data Source=customerApp.db"));
             
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<ICustomerService, CustomerService>();
@@ -54,30 +57,7 @@ namespace EASV.CustomerRestApi
                 using (var scope = app.ApplicationServices.CreateScope())
                 {
                     var ctx = scope.ServiceProvider.GetService<CustomerAppContext>();
-                    var cust1 = ctx.Customers.Add(new Customer()
-                    {
-                        Id = 1,
-                        Address = "BongiStreet",
-                        FirstName = "John",
-                        LastName = "Olesen"
-                    }).Entity;
-                    
-                    ctx.Customers.Add(new Customer()
-                    {
-                        Id = 2,
-                        Address = "BongiStreet 22",
-                        FirstName = "Bill",
-                        LastName = "Bøllesen"
-                    });
-                    
-                    ctx.Orders.Add(new Order()
-                    {
-                        Id = 1,
-                        OrderDate = DateTime.Now,
-                        DeliveryDate = DateTime.Now,
-                        Customer = cust1
-                    });
-                    ctx.SaveChanges();
+                    DBInitializer.SeedDB(ctx);
                 }
             }
             else
