@@ -25,7 +25,7 @@ namespace CustomerApp.Infrastructure.Data.Repositories
 
         public IEnumerable<Order> ReadAll()
         {
-            throw new System.NotImplementedException();
+            return _ctx.Orders;
         }
 
         public Order Update(Order OrderUpdate)
