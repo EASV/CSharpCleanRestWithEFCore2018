@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using CustomerApp.Core.DomainService;
 using CustomerApp.Core.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace CustomerApp.Infrastructure.Data.Repositories
 {
@@ -20,7 +22,8 @@ namespace CustomerApp.Infrastructure.Data.Repositories
 
         public Order ReadyById(int id)
         {
-            throw new System.NotImplementedException();
+            return _ctx.Orders.Include(o => o.Customer)
+                .FirstOrDefault(o => o.Id == id);
         }
 
         public IEnumerable<Order> ReadAll()

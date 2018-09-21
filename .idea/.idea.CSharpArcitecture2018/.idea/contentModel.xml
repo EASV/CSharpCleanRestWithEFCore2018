@@ -41,6 +41,8 @@
           </e>
         </e>
         <e p="Order.cs" t="Include" />
+        <e p="OrderLine.cs" t="Include" />
+        <e p="Product.cs" t="Include" />
       </e>
       <e p="CustomerApp.Infrastructure.Data" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />

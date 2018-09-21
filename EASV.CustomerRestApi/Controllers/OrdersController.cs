@@ -30,7 +30,7 @@ namespace EASV.CustomerRestApi.Controllers
         {
             if (id < 1) return BadRequest("Id must be greater then 0");
             
-            return Ok();
+            return Ok(_orderService.FindOrderById(id));
         }
 
         // POST api/orders -- CREATE

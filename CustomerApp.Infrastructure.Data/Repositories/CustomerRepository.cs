@@ -47,8 +47,8 @@ namespace CustomerApp.Infrastructure.Data.Repositories
 
         public Customer Delete(int id)
         {
-            var ordersToRemove = _ctx.Orders.Where(o => o.Customer.Id == id);
-            _ctx.RemoveRange(ordersToRemove);
+            /*var ordersToRemove = _ctx.Orders.Where(o => o.Customer.Id == id);
+            _ctx.RemoveRange(ordersToRemove);*/
             var custRemoved = _ctx.Remove(new Customer {Id = id}).Entity;
             _ctx.SaveChanges();
             return custRemoved;
