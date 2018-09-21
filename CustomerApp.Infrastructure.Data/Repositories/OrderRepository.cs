@@ -17,7 +17,14 @@ namespace CustomerApp.Infrastructure.Data.Repositories
         
         public Order Create(Order order)
         {
-            throw new System.NotImplementedException();
+            var changeTracker = _ctx.ChangeTracker.Entries<Customer>();
+            if (order.Customer != null)
+            {
+                _ctx.Attach(order.Customer);
+            }
+            var saved = _ctx.Orders.Add(order).Entity;
+            _ctx.SaveChanges();
+            return saved;
         }
 
         public Order ReadyById(int id)
@@ -38,7 +45,9 @@ namespace CustomerApp.Infrastructure.Data.Repositories
 
         public Order Delete(int id)
         {
-            throw new System.NotImplementedException();
+            var removed = _ctx.Remove(new Order {Id = id}).Entity;
+            _ctx.SaveChanges();
+            return removed;
         }
     }
 }
