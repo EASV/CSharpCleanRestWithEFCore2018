@@ -24,7 +24,6 @@ namespace CustomerApp.Infrastructure.Data.Repositories
 
         public Customer ReadyById(int id)
         {
-            var changeTracker = _ctx.ChangeTracker.Entries<Customer>();
             return _ctx.Customers
                 .FirstOrDefault(c => c.Id == id);
         }

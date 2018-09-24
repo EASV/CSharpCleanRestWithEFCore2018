@@ -17,8 +17,9 @@ namespace CustomerApp.Infrastructure.Data.Repositories
         
         public Order Create(Order order)
         {
-            var changeTracker = _ctx.ChangeTracker.Entries<Customer>();
-            if (order.Customer != null)
+            if (order.Customer != null &&
+                _ctx.ChangeTracker.Entries<Customer>()
+                .FirstOrDefault(ce => ce.Entity.Id == order.Customer.Id) == null)
             {
                 _ctx.Attach(order.Customer);
             }
@@ -38,9 +39,21 @@ namespace CustomerApp.Infrastructure.Data.Repositories
             return _ctx.Orders;
         }
 
-        public Order Update(Order OrderUpdate)
+        public Order Update(Order orderUpdate)
         {
-            throw new System.NotImplementedException();
+            if (orderUpdate.Customer != null &&
+                _ctx.ChangeTracker.Entries<Customer>()
+                    .FirstOrDefault(ce => ce.Entity.Id == orderUpdate.Customer.Id) == null)
+            {
+                _ctx.Attach(orderUpdate.Customer);
+            }
+            else
+            {
+                _ctx.Entry(orderUpdate).Reference(o => o.Customer).IsModified = true;
+            }
+            var updated = _ctx.Update(orderUpdate).Entity;
+            _ctx.SaveChanges();
+            return updated;
         }
 
         public Order Delete(int id)

@@ -57,7 +57,7 @@ namespace EASV.CustomerRestApi.Controllers
                 return BadRequest("Parameter Id and order ID must be the same");
             }
 
-            return Ok();
+            return Ok(_orderService.UpdateOrder(order));
         }
 
         // DELETE api/orders/5
