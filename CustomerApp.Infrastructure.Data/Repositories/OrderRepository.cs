@@ -38,9 +38,21 @@ namespace CustomerApp.Infrastructure.Data.Repositories
                 .FirstOrDefault(o => o.Id == id);
         }
 
-        public IEnumerable<Order> ReadAll()
+        public IEnumerable<Order> ReadAll(Filter filter)
         {
-            return _ctx.Orders;
+            if (filter == null)
+            {
+                return _ctx.Orders;
+            }
+
+            return _ctx.Orders
+                .Skip((filter.CurrentPage - 1) * filter.ItemsPrPage)
+                .Take(filter.ItemsPrPage);
+        }
+
+        public int Count()
+        {
+            return _ctx.Orders.Count();
         }
 
         public Order Update(Order orderUpdate)

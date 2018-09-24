@@ -10,10 +10,12 @@ namespace CustomerApp.Core.DomainService
         Order Create(Order order);
         //Read Data
         Order ReadyById(int id);
-        IEnumerable<Order> ReadAll();
+        IEnumerable<Order> ReadAll(Filter filter = null);
+        int Count();
         //Update Data
         Order Update(Order OrderUpdate);
         //Delete Data
         Order Delete(int id);
+        
     }
 }

@@ -19,9 +19,16 @@ namespace EASV.CustomerRestApi.Controllers
         
         // GET api/orders -- READ All
         [HttpGet]
-        public ActionResult<IEnumerable<Order>> Get()
+        public ActionResult<IEnumerable<Order>> Get([FromQuery] Filter filter)
         {
-            return Ok(_orderService.GetAllOrders());
+            try
+            {
+                return Ok(_orderService.GetFilteredOrders(filter));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         // GET api/orders/5 -- READ By Id
