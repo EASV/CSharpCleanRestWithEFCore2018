@@ -17,7 +17,7 @@ namespace CustomerApp.Infrastructure.Data.Repositories
         
         public Order Create(Order order)
         {
-            if (order.Customer != null &&
+            /*if (order.Customer != null &&
                 _ctx.ChangeTracker.Entries<Customer>()
                 .FirstOrDefault(ce => ce.Entity.Id == order.Customer.Id) == null)
             {
@@ -25,7 +25,11 @@ namespace CustomerApp.Infrastructure.Data.Repositories
             }
             var saved = _ctx.Orders.Add(order).Entity;
             _ctx.SaveChanges();
-            return saved;
+            return saved;*/
+
+            _ctx.Attach(order).State = EntityState.Added;
+            _ctx.SaveChanges();
+            return order;
         }
 
         public Order ReadyById(int id)
@@ -41,7 +45,7 @@ namespace CustomerApp.Infrastructure.Data.Repositories
 
         public Order Update(Order orderUpdate)
         {
-            if (orderUpdate.Customer != null &&
+            /*if (orderUpdate.Customer != null &&
                 _ctx.ChangeTracker.Entries<Customer>()
                     .FirstOrDefault(ce => ce.Entity.Id == orderUpdate.Customer.Id) == null)
             {
@@ -52,8 +56,13 @@ namespace CustomerApp.Infrastructure.Data.Repositories
                 _ctx.Entry(orderUpdate).Reference(o => o.Customer).IsModified = true;
             }
             var updated = _ctx.Update(orderUpdate).Entity;
+            _ctx.SaveChanges();*/
+            
+            _ctx.Attach(orderUpdate).State = EntityState.Modified;
+            _ctx.Entry(orderUpdate).Reference(o => o.Customer).IsModified = true;
             _ctx.SaveChanges();
-            return updated;
+
+            return orderUpdate;
         }
 
         public Order Delete(int id)
