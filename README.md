@@ -113,5 +113,13 @@ INSERT INTO dbo.Roles (Name) VALUES
 ('SuperAdministrator')
 
 INSERT INTO dbo.Users ( UserName, Email, PasswordHash, RoleId)
-VALUES ('timmy3', 'timmy3@inko.dk', 'AQAAAAEAACcQAAAAEEi5SaGp0VvXCjSBkDleGXTxVV8fEEaEs+vPEXKmQOzBZiVqTn8kSvaNiXc07txrxQ==', 1), 
-('lbilde', 'urf@easv.dk', 'AQAAAAEAACcQAAAAEKDwmbRrtQpiaZ22H6Awcpp4pRlOZGo3fSqcvRE3WsyMVOJ4sJEEqXRuDJzEsSJUtA==', 3) 
+VALUES ('blinko', 'blinko@inko.dk', 'AQAAAAEAACcQAAAAEFE8XWu6lIyinwsA4bBYJiOvabmOqZoURROPGY/eJdiNES+RGLLU7VW+/g3I+aFepA==', 1), 
+('dinko', 'dinko@inko.dk', 'AQAAAAEAACcQAAAAENLKdwf9yrsIwY92GvwzYNVkXgdjoqWkgtt2TNlExnM+8lHORdurnPFszwiVYvJrwQ==', 3) 
+
+# After Init you can login as User with:
+Username: blinko
+PW: asdQWE123€
+
+# Or you can login as Administrator with:
+Username: dinko
+PW: asdQWE123€
