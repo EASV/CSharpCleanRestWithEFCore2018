@@ -43,7 +43,7 @@ namespace CustomerApp.Core.ApplicationService.Services
             return _orderRepo.ReadyById(id);
         }
 
-        public PagedList<Order> GetAllOrders()
+        public PagedList<Order> GetAll()
         {
             return _orderRepo.ReadAll();
         }
@@ -59,6 +59,11 @@ namespace CustomerApp.Core.ApplicationService.Services
                 throw new InvalidDataException("Index out bounds, CurrentPage is to high");
             }
 
+            if (filter == null || (filter.ItemsPrPage == 0 && filter.CurrentPage == 0))
+            {
+                return GetAll();
+            }
+            
             return _orderRepo.ReadAll(filter);
         }
 

@@ -4,6 +4,8 @@ namespace EASV.CustomerRestApi.Dtos
 {
     public class RegisterDto
     {
+        public string Username { get; set; }
+        
         [Required]
         public string Email { get; set; }
 

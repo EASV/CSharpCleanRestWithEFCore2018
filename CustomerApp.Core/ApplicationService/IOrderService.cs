@@ -12,7 +12,7 @@ namespace CustomerApp.Core.ApplicationService
         Order CreateOrder(Order order);
         //Read //GET
         Order FindOrderById(int id);
-        PagedList<Order> GetAllOrders();
+        PagedList<Order> GetAll();
         PagedList<Order> GetFilteredOrders(Filter filter);
         //Update //PUT
         Order UpdateOrder(Order orderUpdate);

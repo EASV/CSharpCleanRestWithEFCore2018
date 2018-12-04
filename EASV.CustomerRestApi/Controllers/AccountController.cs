@@ -64,8 +64,9 @@ namespace EASV.CustomerRestApi.Controllers
             {
                 var user = new User
                 {
-                    UserName = model.Email, 
-                    Email = model.Email
+                    UserName = string.IsNullOrEmpty(model.Username) ? model.Email: model.Username, 
+                    Email = model.Email,
+                    Role = new Role(){Id = 1}
                 };
                 var userFound = _userService.CreateUser(user, model.Password);
                 

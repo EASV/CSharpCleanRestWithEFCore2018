@@ -46,6 +46,9 @@ namespace CustomerApp.Infrastructure.Data.Repositories
             if (string.IsNullOrEmpty(user.UserName)) user.UserName = user.Email;
             var hasher = new PasswordHasher<User>();
             user.PasswordHash = hasher.HashPassword(user, readablePassword);
+            
+            //Getting Role from DB, to also get the roles name for use in TokenManager later
+            user.Role = _ctx.Roles.FirstOrDefault(r => r.Id == user.Role.Id);
             var savedUser = _ctx.Users.Add(user).Entity;
             _ctx.SaveChanges();
             return savedUser;
@@ -56,10 +59,10 @@ namespace CustomerApp.Infrastructure.Data.Repositories
             var userFromDB = string.IsNullOrEmpty(user.Email)
                 ? _ctx.Users
                     .Include(u => u.Role)
-                    .FirstOrDefault(u => u.UserName == user.UserName)
+                    .FirstOrDefault(u => u.UserName.Equals(user.UserName))
                 : _ctx.Users
                     .Include(u => u.Role)
-                    .FirstOrDefault(u => u.Email == user.Email);
+                    .FirstOrDefault(u => u.Email.Equals(user.Email));
             if(userFromDB == null) throw new InvalidDataException("User Not Found");
 
             var hasher = new PasswordHasher<User>();

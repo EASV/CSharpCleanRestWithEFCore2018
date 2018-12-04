@@ -66,7 +66,6 @@
         <e p="CustomerApp.Infrastructure.Data.csproj" t="IncludeRecursive" />
         <e p="CustomerAppContext.cs" t="Include" />
         <e p="DBInitializer.cs" t="Include" />
-        <e p="DBInitializerProd.cs" t="Include" />
         <e p="Managers" t="Include">
           <e p="TokenManager.cs" t="Include" />
         </e>

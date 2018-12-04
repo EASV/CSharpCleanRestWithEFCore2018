@@ -63,18 +63,18 @@ namespace CustomerApp.Infrastructure.Data
             ctx.Users.Add(
                 new User()
                 {
-                    UserName = "timmy3",
-                    Email = "timmy3@inko.dk",
-                    PasswordHash = "AQAAAAEAACcQAAAAEEi5SaGp0VvXCjSBkDleGXTxVV8fEEaEs+vPEXKmQOzBZiVqTn8kSvaNiXc07txrxQ==",
+                    UserName = "blinko",
+                    Email = "blinko@inko.dk",
+                    PasswordHash = "AQAAAAEAACcQAAAAEFE8XWu6lIyinwsA4bBYJiOvabmOqZoURROPGY/eJdiNES+RGLLU7VW+/g3I+aFepA==",
                     Role = role1
                 }
             );
             ctx.Users.Add(
                 new User()
                 {
-                    UserName = "lbilde",
-                    Email = "urf@easv.dk",
-                    PasswordHash = "AQAAAAEAACcQAAAAEKDwmbRrtQpiaZ22H6Awcpp4pRlOZGo3fSqcvRE3WsyMVOJ4sJEEqXRuDJzEsSJUtA==",
+                    UserName = "dinko",
+                    Email = "dinko@inko.dk",
+                    PasswordHash = "AQAAAAEAACcQAAAAENLKdwf9yrsIwY92GvwzYNVkXgdjoqWkgtt2TNlExnM+8lHORdurnPFszwiVYvJrwQ==",
                     Role = role3
                 }
             );

@@ -29,6 +29,10 @@ namespace CustomerApp.Core.ApplicationService.Services
 
         public PagedList<Product> GetAllFiltered(Filter filter)
         {
+            if (filter == null || (filter.ItemsPrPage == 0 && filter.CurrentPage == 0))
+            {
+                return GetAll();
+            }
             return _productRepo.ReadAll(filter);
         }
 
