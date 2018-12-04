@@ -15,57 +15,19 @@ dbo.AspNetUserLogins, dbo.AspNetUserRoles, dbo.AspNetUserTokens, dbo.AspNetUsers
 
 ### Create All Required tables:
 
-CREATE TABLE "CustomerTypes" (
-         "Id" INTEGER NOT NULL CONSTRAINT "PK_CustomerTypes"  PRIMARY KEY IDENTITY(1,1),
-         "Name" TEXT NULL
-      );
-      
-CREATE TABLE "Products" (
-        "Id" INTEGER NOT NULL CONSTRAINT "PK_Products" PRIMARY KEY IDENTITY(1,1) ,
-        "Name" TEXT NULL,
-        "Price" REAL NOT NULL
-    );
+CREATE TABLE "CustomerTypes" ( "Id" INTEGER NOT NULL CONSTRAINT "PK_CustomerTypes" PRIMARY KEY IDENTITY(1,1), "Name" nvarchar(max) NULL );
 
-CREATE TABLE "Roles" (
-          "Id" INTEGER NOT NULL CONSTRAINT "PK_Roles" PRIMARY KEY IDENTITY(1,1) ,
-          "Name" TEXT NULL
-      );
+CREATE TABLE "Products" ( "Id" INTEGER NOT NULL CONSTRAINT "PK_Products" PRIMARY KEY IDENTITY(1,1) , "Name" nvarchar(max) NULL, "Price" float NOT NULL );
 
- CREATE TABLE "Customers" (
-          "Id" INTEGER NOT NULL CONSTRAINT "PK_Customers" PRIMARY KEY IDENTITY(1,1) ,
-          "FirstName" TEXT NULL,
-          "LastName" TEXT NULL,
-          "Address" TEXT NULL,
-          "TypeId" INTEGER NULL,
-          CONSTRAINT "FK_Customers_CustomerTypes_TypeId" FOREIGN KEY ("TypeId") REFERENCES "CustomerTypes" ("Id") ON DELETE SET NULL
-      );
+CREATE TABLE "Roles" ( "Id" INTEGER NOT NULL CONSTRAINT "PK_Roles" PRIMARY KEY IDENTITY(1,1) , "Name" nvarchar(max) NULL );
 
- CREATE TABLE "Users" (
-          "Id" INTEGER NOT NULL CONSTRAINT "PK_Users" PRIMARY KEY IDENTITY(1,1),
-          "UserName" TEXT NULL,
-          "Email" TEXT NULL,
-          "PasswordHash" TEXT NULL,
-          "RoleId" INTEGER NULL,
-          CONSTRAINT "FK_Users_Roles_RoleId" FOREIGN KEY ("RoleId") REFERENCES "Roles" ("Id") ON DELETE SET NULL
-      );
+CREATE TABLE "Customers" ( "Id" INTEGER NOT NULL CONSTRAINT "PK_Customers" PRIMARY KEY IDENTITY(1,1) , "FirstName" nvarchar(max) NULL, "LastName" nvarchar(max) NULL, "Address" nvarchar(max) NULL, "TypeId" INTEGER NULL, CONSTRAINT "FK_Customers_CustomerTypes_TypeId" FOREIGN KEY ("TypeId") REFERENCES "CustomerTypes" ("Id") ON DELETE SET NULL );
 
-CREATE TABLE "Orders" (
-          "Id" INTEGER NOT NULL CONSTRAINT "PK_Orders" PRIMARY KEY IDENTITY(1,1) ,
-          "OrderDate" TEXT NOT NULL,
-          "DeliveryDate" TEXT NOT NULL,
-          "CustomerId" INTEGER NULL,
-          CONSTRAINT "FK_Orders_Customers_CustomerId" FOREIGN KEY ("CustomerId") REFERENCES "Customers" ("Id") ON DELETE SET NULL
-      );
+CREATE TABLE "Users" ( "Id" INTEGER NOT NULL CONSTRAINT "PK_Users" PRIMARY KEY IDENTITY(1,1), "UserName" nvarchar(max) NULL, "Email" nvarchar(max) NULL, "PasswordHash" nvarchar(max) NULL, "RoleId" INTEGER NULL, CONSTRAINT "FK_Users_Roles_RoleId" FOREIGN KEY ("RoleId") REFERENCES "Roles" ("Id") ON DELETE SET NULL );
 
- CREATE TABLE "OrderLines" (
-          "ProductId" INTEGER NOT NULL,
-          "OrderId" INTEGER NOT NULL,
-          "Qty" INTEGER NOT NULL,
-          "PriceWhenBought" REAL NOT NULL,
-          CONSTRAINT "PK_OrderLines" PRIMARY KEY ("ProductId", "OrderId"),
-          CONSTRAINT "FK_OrderLines_Orders_OrderId" FOREIGN KEY ("OrderId") REFERENCES "Orders" ("Id") ON DELETE CASCADE,
-          CONSTRAINT "FK_OrderLines_Products_ProductId" FOREIGN KEY ("ProductId") REFERENCES "Products" ("Id") ON DELETE CASCADE
-      );
+CREATE TABLE "Orders" ( "Id" INTEGER NOT NULL CONSTRAINT "PK_Orders" PRIMARY KEY IDENTITY(1,1) , "OrderDate" nvarchar(max) NOT NULL, "DeliveryDate" nvarchar(max) NOT NULL, "CustomerId" INTEGER NULL, CONSTRAINT "FK_Orders_Customers_CustomerId" FOREIGN KEY ("CustomerId") REFERENCES "Customers" ("Id") ON DELETE SET NULL );
+
+CREATE TABLE "OrderLines" ( "ProductId" INTEGER NOT NULL, "OrderId" INTEGER NOT NULL, "Qty" INTEGER NOT NULL, "PriceWhenBought" float NOT NULL, CONSTRAINT "PK_OrderLines" PRIMARY KEY ("ProductId", "OrderId"), CONSTRAINT "FK_OrderLines_Orders_OrderId" FOREIGN KEY ("OrderId") REFERENCES "Orders" ("Id") ON DELETE CASCADE, CONSTRAINT "FK_OrderLines_Products_ProductId" FOREIGN KEY ("ProductId") REFERENCES "Products" ("Id") ON DELETE CASCADE );
 
 ### Insert Some default Data:
 
@@ -113,5 +75,14 @@ INSERT INTO dbo.Roles (Name) VALUES
 ('SuperAdministrator')
 
 INSERT INTO dbo.Users ( UserName, Email, PasswordHash, RoleId)
-VALUES ('timmy3', 'timmy3@inko.dk', 'AQAAAAEAACcQAAAAEEi5SaGp0VvXCjSBkDleGXTxVV8fEEaEs+vPEXKmQOzBZiVqTn8kSvaNiXc07txrxQ==', 1), 
-('lbilde', 'urf@easv.dk', 'AQAAAAEAACcQAAAAEKDwmbRrtQpiaZ22H6Awcpp4pRlOZGo3fSqcvRE3WsyMVOJ4sJEEqXRuDJzEsSJUtA==', 3) 
+VALUES ('blinko', 'blinko@inko.dk', 'AQAAAAEAACcQAAAAEFE8XWu6lIyinwsA4bBYJiOvabmOqZoURROPGY/eJdiNES+RGLLU7VW+/g3I+aFepA==', 1), 
+('dinko', 'dinko@inko.dk', 'AQAAAAEAACcQAAAAENLKdwf9yrsIwY92GvwzYNVkXgdjoqWkgtt2TNlExnM+8lHORdurnPFszwiVYvJrwQ==', 3) 
+
+# After Init you can login as
+### User with:
+Username: blinko
+PW: asdQWE123€
+
+### Administrator with:
+Username: dinko
+PW: asdQWE123€
