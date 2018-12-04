@@ -17,7 +17,7 @@ dbo.AspNetUserLogins, dbo.AspNetUserRoles, dbo.AspNetUserTokens, dbo.AspNetUsers
 
 CREATE TABLE "CustomerTypes" ( "Id" INTEGER NOT NULL CONSTRAINT "PK_CustomerTypes" PRIMARY KEY IDENTITY(1,1), "Name" nvarchar(max) NULL );
 
-CREATE TABLE "Products" ( "Id" INTEGER NOT NULL CONSTRAINT "PK_Products" PRIMARY KEY IDENTITY(1,1) , "Name" nvarchar(max) NULL, "Price" REAL NOT NULL );
+CREATE TABLE "Products" ( "Id" INTEGER NOT NULL CONSTRAINT "PK_Products" PRIMARY KEY IDENTITY(1,1) , "Name" nvarchar(max) NULL, "Price" float NOT NULL );
 
 CREATE TABLE "Roles" ( "Id" INTEGER NOT NULL CONSTRAINT "PK_Roles" PRIMARY KEY IDENTITY(1,1) , "Name" nvarchar(max) NULL );
 
@@ -27,7 +27,7 @@ CREATE TABLE "Users" ( "Id" INTEGER NOT NULL CONSTRAINT "PK_Users" PRIMARY KEY I
 
 CREATE TABLE "Orders" ( "Id" INTEGER NOT NULL CONSTRAINT "PK_Orders" PRIMARY KEY IDENTITY(1,1) , "OrderDate" nvarchar(max) NOT NULL, "DeliveryDate" nvarchar(max) NOT NULL, "CustomerId" INTEGER NULL, CONSTRAINT "FK_Orders_Customers_CustomerId" FOREIGN KEY ("CustomerId") REFERENCES "Customers" ("Id") ON DELETE SET NULL );
 
-CREATE TABLE "OrderLines" ( "ProductId" INTEGER NOT NULL, "OrderId" INTEGER NOT NULL, "Qty" INTEGER NOT NULL, "PriceWhenBought" REAL NOT NULL, CONSTRAINT "PK_OrderLines" PRIMARY KEY ("ProductId", "OrderId"), CONSTRAINT "FK_OrderLines_Orders_OrderId" FOREIGN KEY ("OrderId") REFERENCES "Orders" ("Id") ON DELETE CASCADE, CONSTRAINT "FK_OrderLines_Products_ProductId" FOREIGN KEY ("ProductId") REFERENCES "Products" ("Id") ON DELETE CASCADE );
+CREATE TABLE "OrderLines" ( "ProductId" INTEGER NOT NULL, "OrderId" INTEGER NOT NULL, "Qty" INTEGER NOT NULL, "PriceWhenBought" float NOT NULL, CONSTRAINT "PK_OrderLines" PRIMARY KEY ("ProductId", "OrderId"), CONSTRAINT "FK_OrderLines_Orders_OrderId" FOREIGN KEY ("OrderId") REFERENCES "Orders" ("Id") ON DELETE CASCADE, CONSTRAINT "FK_OrderLines_Products_ProductId" FOREIGN KEY ("ProductId") REFERENCES "Products" ("Id") ON DELETE CASCADE );
 
 ### Insert Some default Data:
 
