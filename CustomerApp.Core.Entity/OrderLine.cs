@@ -9,5 +9,6 @@ namespace CustomerApp.Core.Entity
         public Order Order { get; set; }
 
         public int Qty { get; set; }
+        public double PriceWhenBought { get; set; }
     }
 }

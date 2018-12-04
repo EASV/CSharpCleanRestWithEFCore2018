@@ -2,11 +2,10 @@ using System.Collections.Generic;
 
 namespace CustomerApp.Core.Entity
 {
-    public class Product
+    public class Role
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public double Price { get; set; }
-        public List<OrderLine> OrderLines { get; set; }
+        public List<User> Users { get; set; }
     }
 }

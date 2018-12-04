@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="/32896f59" t="IncludeRecursive" />
     <e p="/app" t="IncludeRecursive" />
+    <e p="/fed4dfdc" t="IncludeRecursive" />
+    <e p="$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.3.1/build/netcoreapp1.0/xunit.runner.reporters.netcoreapp10.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.3.1/build/netcoreapp1.0/xunit.runner.utility.netcoreapp10.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.3.1/build/netcoreapp1.0/xunit.runner.visualstudio.dotnetcore.testadapter.dll" t="Include" />
     <e p="$PROJECT_DIR$" t="IncludeFlat">
       <e p="core" t="Include" />
       <e p="CSharpArcitecture2018.sln" t="IncludeFlat" />
@@ -10,16 +13,26 @@
         <e p="ApplicationService" t="Include">
           <e p="ICustomerService.cs" t="Include" />
           <e p="IOrderService.cs" t="Include" />
+          <e p="IProductService.cs" t="Include" />
+          <e p="IUserService.cs" t="Include" />
           <e p="Services" t="Include">
             <e p="CustomerService.cs" t="Include" />
             <e p="OrderService.cs" t="Include" />
+            <e p="ProductService.cs" t="Include" />
+            <e p="UserService.cs" t="Include" />
           </e>
         </e>
         <e p="bin" t="ExcludeRecursive" />
         <e p="CustomerApp.Core.csproj" t="IncludeRecursive" />
         <e p="DomainService" t="Include">
+          <e p="Filtering" t="Include">
+            <e p="Filter.cs" t="Include" />
+            <e p="FilteredList.cs" t="Include" />
+          </e>
           <e p="ICustomerRepository.cs" t="Include" />
           <e p="IOrderRepository.cs" t="Include" />
+          <e p="IProductRepository.cs" t="Include" />
+          <e p="IUserRepository.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
@@ -33,7 +46,7 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="Customer.cs" t="Include" />
         <e p="CustomerApp.Core.Entity.csproj" t="IncludeRecursive" />
-        <e p="Filter.cs" t="Include" />
+        <e p="CustomerType.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netstandard2.0" t="Include">
@@ -43,13 +56,20 @@
         </e>
         <e p="Order.cs" t="Include" />
         <e p="OrderLine.cs" t="Include" />
+        <e p="PagedList.cs" t="Include" />
         <e p="Product.cs" t="Include" />
+        <e p="Role.cs" t="Include" />
+        <e p="User.cs" t="Include" />
       </e>
       <e p="CustomerApp.Infrastructure.Data" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
         <e p="CustomerApp.Infrastructure.Data.csproj" t="IncludeRecursive" />
         <e p="CustomerAppContext.cs" t="Include" />
         <e p="DBInitializer.cs" t="Include" />
+        <e p="DBInitializerProd.cs" t="Include" />
+        <e p="Managers" t="Include">
+          <e p="TokenManager.cs" t="Include" />
+        </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp2.1" t="Include">
@@ -60,6 +80,8 @@
         <e p="Repositories" t="Include">
           <e p="CustomerRepository.cs" t="Include" />
           <e p="OrderRepository.cs" t="Include" />
+          <e p="ProductRepository.cs" t="Include" />
+          <e p="UserRepository.cs" t="Include" />
         </e>
       </e>
       <e p="EASV.CustomerRestApi" t="IncludeRecursive">
@@ -67,10 +89,19 @@
         <e p="appsettings.json" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="Controllers" t="Include">
+          <e p="AccountController.cs" t="Include" />
           <e p="CustomersController.cs" t="Include" />
+          <e p="CustomerTypesController.cs" t="Include" />
           <e p="OrdersController.cs" t="Include" />
+          <e p="ProductsController.cs" t="Include" />
+          <e p="UsersController.cs" t="Include" />
         </e>
         <e p="customerApp.db" t="Include" />
+        <e p="Dtos" t="Include">
+          <e p="CustomerDTO.cs" t="Include" />
+          <e p="LoginDto.cs" t="Include" />
+          <e p="RegisterDto.cs" t="Include" />
+        </e>
         <e p="EASV.CustomerRestApi.csproj" t="IncludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
@@ -88,9 +119,26 @@
       </e>
       <e p="Infrastructure" t="Include" />
       <e p="packages" t="ExcludeRecursive" />
+      <e p="TestCore" t="IncludeRecursive">
+        <e p="ApplicationService" t="Include">
+          <e p="Service" t="Include">
+            <e p="OrderServiceTest.cs" t="Include" />
+          </e>
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp2.1" t="Include">
+              <e p="TestCore.AssemblyInfo.cs" t="Include" />
+              <e p="TestCore.Program.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="TestCore.csproj" t="IncludeRecursive" />
+      </e>
       <e p="UI" t="Include" />
     </e>
     <e p="$USER_HOME$/Library/Caches/Rider2018.2/extResources" t="IncludeRecursive" />
-    <e p="$USER_HOME$/Library/Caches/Rider2018.2/resharper-host/local/Transient/ReSharperHost/v182/SolutionCaches/_CSharpArcitecture2018.-1601991669.00" t="ExcludeRecursive" />
+    <e p="$USER_HOME$/Library/Caches/Rider2018.2/resharper-host/local/Transient/ReSharperHost/v182/SolutionCaches/_CSharpArcitecture2018.-96114476.00" t="ExcludeRecursive" />
   </component>
 </project>

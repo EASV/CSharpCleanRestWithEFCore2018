@@ -12,8 +12,8 @@ namespace CustomerApp.Core.ApplicationService
         Order CreateOrder(Order order);
         //Read //GET
         Order FindOrderById(int id);
-        List<Order> GetAllOrders();
-        List<Order> GetFilteredOrders(Filter filter);
+        PagedList<Order> GetAllOrders();
+        PagedList<Order> GetFilteredOrders(Filter filter);
         //Update //PUT
         Order UpdateOrder(Order orderUpdate);
         

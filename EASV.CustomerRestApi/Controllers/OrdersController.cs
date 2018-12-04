@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using CustomerApp.Core.ApplicationService;
 using CustomerApp.Core.Entity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EASV.CustomerRestApi.Controllers

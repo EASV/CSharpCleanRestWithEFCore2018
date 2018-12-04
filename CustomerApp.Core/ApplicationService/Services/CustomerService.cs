@@ -42,47 +42,33 @@ namespace CustomerApp.Core.ApplicationService.Services
 
         public Customer FindCustomerByIdIncludeOrders(int id)
         {
-            var customer = _customerRepo.ReadyByIdIncludeOrders(id);
-            return customer;
-            
-            /*    Read Cust By Id
-             *     SELECT "c"."Id", "c"."Address", "c"."FirstName", "c"."LastName"
-                  FROM "Customers" AS "c"
-                  WHERE "c"."Id" = @__id_0
-                  LIMIT 1
-             */
-            /*    Read Orders with Customer ID
-             *     SELECT "o"."Id", "o"."CustomerId", "o"."DeliveryDate", "o"."OrderDate"
-                    FROM "Orders" AS "o"
-             */
+            return _customerRepo.ReadyByIdIncludeOrders(id);
         }
 
-        public List<Customer> GetAllCustomers()
+        public FilteredList<Customer> GetAllCustomers(Filter filter = null)
         {
-            return _customerRepo.ReadAll().ToList();
+            return _customerRepo.ReadAll(filter);
         }
 
-        public List<Customer> GetAllByFirstName(string name)
+        public List<CustomerType> ReadCustomerTypes()
         {
-            var list = _customerRepo.ReadAll();
-            var queryContinued = list.Where(cust => cust.FirstName.Equals(name));
-            queryContinued.OrderBy(customer => customer.FirstName);
-            //Not executed anything yet
-            return queryContinued.ToList();
+            return _customerRepo.ReadCustomerTypes();
         }
+
 
         public Customer UpdateCustomer(Customer customerUpdate)
         {
-            var customer = FindCustomerById(customerUpdate.Id);
-            customer.FirstName = customerUpdate.FirstName;
-            customer.LastName = customerUpdate.LastName;
-            customer.Address = customerUpdate.Address;
-            return customer;
+            return _customerRepo.Update(customerUpdate);
         }
 
         public Customer DeleteCustomer(int id)
         {
             return _customerRepo.Delete(id);
+        }
+
+        public int Count()
+        {
+            return _customerRepo.Count();
         }
     }
 }

@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using CustomerApp.Core.DomainService;
 using CustomerApp.Core.Entity;
 using Microsoft.EntityFrameworkCore;
@@ -35,19 +37,33 @@ namespace CustomerApp.Infrastructure.Data.Repositories
         public Order ReadyById(int id)
         {
             return _ctx.Orders.Include(o => o.Customer)
+                .Include(o => o.OrderLines)
+                .ThenInclude(ol => ol.Product)
                 .FirstOrDefault(o => o.Id == id);
         }
 
-        public IEnumerable<Order> ReadAll(Filter filter)
+        public PagedList<Order> ReadAll(Filter filter)
         {
+            var query = _ctx.Set<Order>();
+            
             if (filter == null)
             {
-                return _ctx.Orders;
+                return new PagedList<Order>() {Items = _ctx.Orders.ToList(), Count = _ctx.Orders.Count()};
             }
 
-            return _ctx.Orders
+            var page = query.Select(e => e)
                 .Skip((filter.CurrentPage - 1) * filter.ItemsPrPage)
-                .Take(filter.ItemsPrPage);
+                .Take(filter.ItemsPrPage)
+                .GroupBy(e => new { Total = query.Count() })
+                .FirstOrDefault();
+            
+            if (page != null)
+            {
+                int total = page.Key.Total;
+                List<Order> items = page.Select(e => e).ToList();
+                return new PagedList<Order>() {Items = items, Count = total};
+            }
+            return new PagedList<Order>() {Items = new List<Order>(), Count = 0};
         }
 
         public int Count()
@@ -57,23 +73,24 @@ namespace CustomerApp.Infrastructure.Data.Repositories
 
         public Order Update(Order orderUpdate)
         {
-            /*if (orderUpdate.Customer != null &&
-                _ctx.ChangeTracker.Entries<Customer>()
-                    .FirstOrDefault(ce => ce.Entity.Id == orderUpdate.Customer.Id) == null)
-            {
-                _ctx.Attach(orderUpdate.Customer);
-            }
-            else
-            {
-                _ctx.Entry(orderUpdate).Reference(o => o.Customer).IsModified = true;
-            }
-            var updated = _ctx.Update(orderUpdate).Entity;
-            _ctx.SaveChanges();*/
-            
+            //Clone orderlines to new location in memory, so they are not overridden on Attach
+            var newOrderLines = new List<OrderLine>(orderUpdate.OrderLines);
+            //Attach order so basic properties are updated
             _ctx.Attach(orderUpdate).State = EntityState.Modified;
+            //Remove all orderlines with updated order information
+            _ctx.OrderLines.RemoveRange(
+                _ctx.OrderLines.Where(ol => ol.OrderId == orderUpdate.Id)
+            );
+            //Add all orderlines with updated order information
+            foreach (var ol in newOrderLines)
+            {
+                _ctx.Entry(ol).State = EntityState.Added;
+            }
+            //Update customer relation
             _ctx.Entry(orderUpdate).Reference(o => o.Customer).IsModified = true;
+            // Save it
             _ctx.SaveChanges();
-
+            //Return it
             return orderUpdate;
         }
 
