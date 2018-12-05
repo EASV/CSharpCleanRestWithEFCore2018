@@ -8,8 +8,8 @@ namespace CustomerApp.Core.ApplicationService
         Product Create(Product product);
         //Read //GET
         Product FindById(int id);
-        PagedList<Product> GetAll();
-        PagedList<Product> GetAllFiltered(Filter filter);
+        FilteredList<Product> GetAll();
+        FilteredList<Product> GetAllFiltered(Filter filter);
         //Update //PUT
         Product Update(Product orderUpdate);
         

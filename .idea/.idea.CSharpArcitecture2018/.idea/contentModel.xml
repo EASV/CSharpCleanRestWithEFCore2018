@@ -56,7 +56,6 @@
         </e>
         <e p="Order.cs" t="Include" />
         <e p="OrderLine.cs" t="Include" />
-        <e p="PagedList.cs" t="Include" />
         <e p="Product.cs" t="Include" />
         <e p="Role.cs" t="Include" />
         <e p="User.cs" t="Include" />

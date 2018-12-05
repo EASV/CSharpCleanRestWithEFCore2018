@@ -43,12 +43,12 @@ namespace CustomerApp.Core.ApplicationService.Services
             return _orderRepo.ReadyById(id);
         }
 
-        public PagedList<Order> GetAll()
+        public FilteredList<Order> GetAll()
         {
             return _orderRepo.ReadAll();
         }
 
-        public PagedList<Order> GetFilteredOrders(Filter filter)
+        public FilteredList<Order> GetFilteredOrders(Filter filter)
         {
             if (filter.CurrentPage < 0 || filter.ItemsPrPage < 0)
             {

@@ -9,7 +9,7 @@ namespace CustomerApp.Core.DomainService
         Product Create(Product product);
         //Read Data
         Product ReadyById(int id);
-        PagedList<Product> ReadAll(Filter filter = null);
+        FilteredList<Product> ReadAll(Filter filter = null);
         int Count();
         //Update Data
         Product Update(Product productUpdate);

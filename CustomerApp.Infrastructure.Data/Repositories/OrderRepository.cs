@@ -25,9 +25,16 @@ namespace CustomerApp.Infrastructure.Data.Repositories
             {
                 _ctx.Attach(order.Customer);
             }
-            var saved = _ctx.Orders.Add(order).Entity;
-            _ctx.SaveChanges();
-            return saved;*/
+            order = _ctx.Add(order).Entity;
+            if (order.OrderLines != null)
+            {
+                foreach (var ol in order.OrderLines)
+                {
+                    ol.OrderId = order.Id;
+                    ol.ProductId = ol.ProductId;
+                    _ctx.Add(ol);
+                }
+            } */
 
             _ctx.Attach(order).State = EntityState.Added;
             _ctx.SaveChanges();
@@ -42,28 +49,21 @@ namespace CustomerApp.Infrastructure.Data.Repositories
                 .FirstOrDefault(o => o.Id == id);
         }
 
-        public PagedList<Order> ReadAll(Filter filter)
+        public FilteredList<Order> ReadAll(Filter filter)
         {
-            var query = _ctx.Set<Order>();
-            
             if (filter == null)
             {
-                return new PagedList<Order>() {Items = _ctx.Orders.ToList(), Count = _ctx.Orders.Count()};
+                return new FilteredList<Order>() {List = _ctx.Orders.ToList(), Count = _ctx.Orders.Count()};
             }
 
-            var page = query.Select(e => e)
+            var items = _ctx.Orders.Include(o => o.OrderLines)
+                .ThenInclude(ol => ol.Product)
+                .Include(o => o.Customer)
                 .Skip((filter.CurrentPage - 1) * filter.ItemsPrPage)
                 .Take(filter.ItemsPrPage)
-                .GroupBy(e => new { Total = query.Count() })
-                .FirstOrDefault();
+                .ToList();
+            return new FilteredList<Order>() {List = items, Count = Count()};
             
-            if (page != null)
-            {
-                int total = page.Key.Total;
-                List<Order> items = page.Select(e => e).ToList();
-                return new PagedList<Order>() {Items = items, Count = total};
-            }
-            return new PagedList<Order>() {Items = new List<Order>(), Count = 0};
         }
 
         public int Count()

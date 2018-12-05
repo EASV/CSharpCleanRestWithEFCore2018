@@ -19,7 +19,7 @@ namespace EASV.CustomerRestApi.Controllers
         
         // GET api/products -- READ All
         [HttpGet]
-        public ActionResult<IEnumerable<Product>> Get([FromQuery] Filter filter)
+        public ActionResult<FilteredList<Product>> Get([FromQuery] Filter filter)
         {
             try
             {

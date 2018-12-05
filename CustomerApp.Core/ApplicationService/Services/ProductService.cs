@@ -22,12 +22,12 @@ namespace CustomerApp.Core.ApplicationService.Services
             return _productRepo.ReadyById(id);
         }
 
-        public PagedList<Product> GetAll()
+        public FilteredList<Product> GetAll()
         {
             return _productRepo.ReadAll();
         }
 
-        public PagedList<Product> GetAllFiltered(Filter filter)
+        public FilteredList<Product> GetAllFiltered(Filter filter)
         {
             if (filter == null || (filter.ItemsPrPage == 0 && filter.CurrentPage == 0))
             {

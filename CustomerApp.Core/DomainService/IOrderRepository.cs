@@ -10,7 +10,7 @@ namespace CustomerApp.Core.DomainService
         Order Create(Order order);
         //Read Data
         Order ReadyById(int id);
-        PagedList<Order> ReadAll(Filter filter = null);
+        FilteredList<Order> ReadAll(Filter filter = null);
         int Count();
         //Update Data
         Order Update(Order OrderUpdate);

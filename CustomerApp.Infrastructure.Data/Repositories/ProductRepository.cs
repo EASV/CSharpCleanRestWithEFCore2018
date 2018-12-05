@@ -30,14 +30,14 @@ namespace CustomerApp.Infrastructure.Data.Repositories
                 .FirstOrDefault(o => o.Id == id);
         }
 
-        public PagedList<Product> ReadAll(Filter filter)
+        public FilteredList<Product> ReadAll(Filter filter)
         {
             var query = _ctx.Set<Product>();
             
             if (filter == null)
             {
-                return new PagedList<Product>() {
-                    Items = _ctx.Products.ToList(), 
+                return new FilteredList<Product>() {
+                    List = _ctx.Products.ToList(), 
                     Count = _ctx.Products.Count()
                 };
             }
@@ -52,11 +52,11 @@ namespace CustomerApp.Infrastructure.Data.Repositories
             {
                 var total = page.Key.Total;
                 var items = page.Select(e => e).ToList();
-                return new PagedList<Product>() {Items = items, Count = total};
+                return new FilteredList<Product>() {List = items, Count = total};
             }
-            return new PagedList<Product>()
+            return new FilteredList<Product>()
             {
-                Items = new List<Product>(), 
+                List = new List<Product>(), 
                 Count = 0
             };
         }
