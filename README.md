@@ -25,7 +25,7 @@ CREATE TABLE "Customers" ( "Id" INTEGER NOT NULL CONSTRAINT "PK_Customers" PRIMA
 
 CREATE TABLE "Users" ( "Id" INTEGER NOT NULL CONSTRAINT "PK_Users" PRIMARY KEY IDENTITY(1,1), "UserName" nvarchar(max) NULL, "Email" nvarchar(max) NULL, "PasswordHash" nvarchar(max) NULL, "RoleId" INTEGER NULL, CONSTRAINT "FK_Users_Roles_RoleId" FOREIGN KEY ("RoleId") REFERENCES "Roles" ("Id") ON DELETE SET NULL );
 
-CREATE TABLE "Orders" ( "Id" INTEGER NOT NULL CONSTRAINT "PK_Orders" PRIMARY KEY IDENTITY(1,1) , "OrderDate" nvarchar(max) NOT NULL, "DeliveryDate" nvarchar(max) NOT NULL, "CustomerId" INTEGER NULL, CONSTRAINT "FK_Orders_Customers_CustomerId" FOREIGN KEY ("CustomerId") REFERENCES "Customers" ("Id") ON DELETE SET NULL );
+CREATE TABLE "Orders" ( "Id" INTEGER NOT NULL CONSTRAINT "PK_Orders" PRIMARY KEY IDENTITY(1,1) , "OrderDate" datetime2 NOT NULL, "DeliveryDate" datetime2 NOT NULL, "CustomerId" INTEGER NULL, CONSTRAINT "FK_Orders_Customers_CustomerId" FOREIGN KEY ("CustomerId") REFERENCES "Customers" ("Id") ON DELETE SET NULL );
 
 CREATE TABLE "OrderLines" ( "ProductId" INTEGER NOT NULL, "OrderId" INTEGER NOT NULL, "Qty" INTEGER NOT NULL, "PriceWhenBought" float NOT NULL, CONSTRAINT "PK_OrderLines" PRIMARY KEY ("ProductId", "OrderId"), CONSTRAINT "FK_OrderLines_Orders_OrderId" FOREIGN KEY ("OrderId") REFERENCES "Orders" ("Id") ON DELETE CASCADE, CONSTRAINT "FK_OrderLines_Products_ProductId" FOREIGN KEY ("ProductId") REFERENCES "Products" ("Id") ON DELETE CASCADE );
 
