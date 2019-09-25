@@ -41,7 +41,26 @@ namespace EASV.CustomerRestApi.Controllers
                     newFilteredList.Count = list.Count; 
                     return Ok(newFilteredList);
                 }
-                return Ok(_customerService.GetAllCustomers(filter));
+                var advancedFilteredList = _customerService.GetAllCustomers(filter);
+                var newCustomerList = new List<object>();
+                foreach (var customer in advancedFilteredList.List)
+                {
+                    newCustomerList.Add(
+                        new
+                        {
+                            bingo_address = customer.Address,
+                            customer.FirstName,
+                            customer.LastName,
+                            TypeName = customer.Type != null ? customer.Type.Name : "Unknown"
+                        });
+                }
+                
+                return Ok(
+                    new FilteredList<object>
+                    {
+                        Count = advancedFilteredList.Count,
+                        List = newCustomerList
+                    });
             }
             catch (Exception e)
             {

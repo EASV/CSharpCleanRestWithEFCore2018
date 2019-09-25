@@ -9,11 +9,20 @@ namespace CustomerApp.Infrastructure.Data
         {
             ctx.Database.EnsureDeleted();
             ctx.Database.EnsureCreated();
+            var type1 = ctx.CustomerTypes.Add(new CustomerType()
+            {
+                Name = "Great White Shark"
+            }).Entity;
+            var type2 = ctx.CustomerTypes.Add(new CustomerType()
+            {
+                Name = "Old Yellow"
+            }).Entity;
             var cust1 = ctx.Customers.Add(new Customer()
             {
                 Address = "BongiStreet",
                 FirstName = "John",
-                LastName = "Olesen"
+                LastName = "Olesen",
+                Type = type1
             }).Entity;
                     
             var cust2 = ctx.Customers.Add(new Customer()
@@ -22,6 +31,16 @@ namespace CustomerApp.Infrastructure.Data
                 FirstName = "Bill",
                 LastName = "Bøllesen"
             }).Entity;
+            for (var i = 0; i < 1000; i++)
+            {
+                ctx.Customers.Add(new Customer()
+                {
+                    Address = $"Street {i}",
+                    FirstName = $"FirstName {i}",
+                    LastName = $"LastName {i}",
+                    Type = i%2==0 ? type1: type2
+                });
+            }
                     
             var order1 = ctx.Orders.Add(new Order()
             {
