@@ -118,6 +118,7 @@
       <e p="TestCore" t="IncludeRecursive">
         <e p="ApplicationService" t="Include">
           <e p="Service" t="Include">
+            <e p="CustomerServiceTest.cs" t="Include" />
             <e p="OrderServiceTest.cs" t="Include" />
           </e>
         </e>

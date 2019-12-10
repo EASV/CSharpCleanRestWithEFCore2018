@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using CustomerApp.Core.DomainService;
 using CustomerApp.Core.Entity;
@@ -32,6 +33,23 @@ namespace CustomerApp.Core.ApplicationService.Services
 
         public Customer CreateCustomer(Customer cust)
         {
+            if (cust == null)
+            {
+                throw new InvalidDataException("Customer Needs to be there");
+            }
+            if (cust.FirstName == null)
+            {
+                throw new InvalidDataException("Customer Needs a FirstName");
+            }
+            if (string.IsNullOrEmpty(cust.FirstName))
+            {
+                throw new InvalidDataException("Customer FirstName Cant Be Blank");
+            }
+
+            if (_customerRepo.ReadCustomerTypeById(cust.Type.Id) == null)
+            {
+                throw new InvalidDataException();
+            }
             return _customerRepo.Create(cust);
         }
 

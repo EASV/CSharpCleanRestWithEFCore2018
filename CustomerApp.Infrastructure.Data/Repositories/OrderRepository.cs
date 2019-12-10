@@ -43,7 +43,9 @@ namespace CustomerApp.Infrastructure.Data.Repositories
 
         public Order ReadyById(int id)
         {
-            return _ctx.Orders.Include(o => o.Customer)
+            return _ctx.Orders
+                .AsNoTracking()
+                .Include(o => o.Customer)
                 .Include(o => o.OrderLines)
                 .ThenInclude(ol => ol.Product)
                 .FirstOrDefault(o => o.Id == id);
@@ -53,10 +55,17 @@ namespace CustomerApp.Infrastructure.Data.Repositories
         {
             if (filter == null)
             {
-                return new FilteredList<Order>() {List = _ctx.Orders.ToList(), Count = _ctx.Orders.Count()};
+                return new FilteredList<Order>() {
+                    List = _ctx.Orders
+                            .AsNoTracking()
+                            .ToList(), 
+                    Count = _ctx.Orders.Count()
+                };
             }
 
-            var items = _ctx.Orders.Include(o => o.OrderLines)
+            var items = _ctx.Orders
+                .AsNoTracking()
+                .Include(o => o.OrderLines)
                 .ThenInclude(ol => ol.Product)
                 .Include(o => o.Customer)
                 .Skip((filter.CurrentPage - 1) * filter.ItemsPrPage)
@@ -76,7 +85,7 @@ namespace CustomerApp.Infrastructure.Data.Repositories
             //Clone orderlines to new location in memory, so they are not overridden on Attach
             var newOrderLines = new List<OrderLine>(orderUpdate.OrderLines);
             //Attach order so basic properties are updated
-            _ctx.Attach(orderUpdate).State = EntityState.Modified;
+            _ctx.Entry(orderUpdate).State = EntityState.Modified;
             //Remove all orderlines with updated order information
             _ctx.OrderLines.RemoveRange(
                 _ctx.OrderLines.Where(ol => ol.OrderId == orderUpdate.Id)

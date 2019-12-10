@@ -29,18 +29,29 @@ namespace CustomerApp.Infrastructure.Data.Repositories
         public Customer ReadyById(int id)
         {
             return _ctx.Customers
+                .AsNoTracking()
                 .Include(c => c.Type)
                 .FirstOrDefault(c => c.Id == id);
         }
 
         public List<CustomerType> ReadCustomerTypes()
         {
-            return _ctx.CustomerTypes.ToList();
+            return _ctx.CustomerTypes
+                .AsNoTracking()
+                .ToList();
+        }
+        
+        public CustomerType ReadCustomerTypeById(int id)
+        {
+            return _ctx.CustomerTypes
+                .AsNoTracking()
+                .FirstOrDefault(ct => ct.Id == id);
         }
 
         public Customer ReadyByIdIncludeOrders(int id)
         {
             return _ctx.Customers
+                .AsNoTracking()
                 .Include(c => c.Type)
                 .Include(c => c.Orders)
                 .FirstOrDefault(c => c.Id == id);
@@ -55,6 +66,7 @@ namespace CustomerApp.Infrastructure.Data.Repositories
             if (filter != null && filter.ItemsPrPage > 0 && filter.CurrentPage > 0)
             {
                 filteredList.List = _ctx.Customers
+                    .AsNoTracking()
                     .Include(c => c.Type)
                     .Skip((filter.CurrentPage - 1) * filter.ItemsPrPage)
                     .Take(filter.ItemsPrPage);
@@ -64,6 +76,7 @@ namespace CustomerApp.Infrastructure.Data.Repositories
             
             //Else just return the full list and get the count from the list (to save a SQL call)
             filteredList.List = _ctx.Customers
+                    .AsNoTracking()
                     .Include(c => c.Type);
             filteredList.Count = filteredList.List.Count();
             return filteredList;
