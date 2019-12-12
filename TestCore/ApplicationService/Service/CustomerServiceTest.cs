@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using CustomerApp.Core.ApplicationService.Services;
 using CustomerApp.Core.DomainService;
 using CustomerApp.Core.Entity;
@@ -109,6 +111,42 @@ namespace TestCore.ApplicationService.Service
             service.CreateCustomer(cust);
             custRepo.Verify(x => x.ReadCustomerTypeById(Type.Id), Times.Once);
 
+        }
+        
+        
+        
+        [Fact]
+        public void SearchReturnsCorrectCustomers()
+        {
+            var customers = new List<Customer>();
+            for (int i = 0; i < 1000; i++)
+            {
+                customers.Add(new Customer()
+                {
+                    Id = i,
+                    FirstName = "Do" + i
+                });
+            }
+            var filter = new Filter()
+            {
+                CurrentPage = 1,
+                ItemsPrPage = 10,
+                SearchTextFirstName = "Do1"
+            };
+            var expectedFilteredList = new FilteredList<Customer>()
+            {
+                List = customers.Where(c => c.FirstName.Contains(filter.SearchTextFirstName)),
+                Count = customers.Count
+            };
+            var custRepo = new Mock<ICustomerRepository>();
+            custRepo.Setup(cr => cr.ReadAll(filter))
+                .Returns(expectedFilteredList);
+            var orderRepo = new Mock<IOrderRepository>();
+
+            var service = new CustomerService(custRepo.Object, orderRepo.Object);
+
+            var foundCustomers = service.GetAllCustomers(filter);
+            Assert.Equal(expectedFilteredList, foundCustomers);
         }
     }
 }
